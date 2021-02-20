@@ -9,6 +9,11 @@
       "email": "s.mordziol@mistralys.eu"
     }
   ],
+  "autoload": {
+    "classmap": [
+      "src"
+    ]
+  },
   "require": {
     "php": "<=7.4.9"
   }
