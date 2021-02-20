@@ -10,9 +10,6 @@ declare(strict_types=1);
 
 namespace Mistralys;
 
-use AppUtils\Interface_Optionable;
-use AppUtils\Traits_Optionable;
-
 /**
  * Class used to enforce an SSL connection in a website,
  * by automatically redirecting to the https version of
@@ -21,14 +18,17 @@ use AppUtils\Traits_Optionable;
  * @package SSLSwitcher
  * @author Sebastian Mordziol <s.mordziol@mistralys.eu>
  */
-class SSLSwitcher implements Interface_Optionable
+class SSLSwitcher
 {
-    use Traits_Optionable;
-
     /**
      * @var string
      */
     private $websiteURL;
+
+    /**
+     * @var bool
+     */
+    private $exit = true;
 
     public function __construct(string $websiteURL)
     {
@@ -124,8 +124,8 @@ class SSLSwitcher implements Interface_Optionable
 
         header("Location: " . $this->getTargetURL());
 
-        if($this->getBoolOption('exit')) {
-            exit;
+        if($this->exit === true) {
+            exit();
         }
     }
 
@@ -135,14 +135,7 @@ class SSLSwitcher implements Interface_Optionable
      */
     public function setExitEnabled(bool $enabled) : SSLSwitcher
     {
-        $this->setOption('exit', $enabled);
+        $this->exit = $enabled;
         return $this;
-    }
-
-    public function getDefaultOptions(): array
-    {
-        return array(
-            'exit' => true
-        );
     }
 }
