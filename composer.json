@@ -10,6 +10,7 @@
     }
   ],
   "require": {
-    "php": "<=7.4"
+    "php": "<=7.4.9",
+    "mistralys/application-utils": ">=1.3.1"
   }
 }
